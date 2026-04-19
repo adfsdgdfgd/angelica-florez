@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Plan Angélica Flórez · Transformación Avanzada</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f0d;--card:#141f1a;--border:rgba(180,255,210,.1);--green:#4fffb0;--green2:#a8ffd8;--gold:#ffd166;--orange:#ff8c42;--red:#ff6b6b;--blue:#6b9aff;--text:#e8f5ee;--muted:#7aaa90;--r:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(79,255,176,.07),transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(255,140,66,.05),transparent 55%);pointer-events:none;z-index:0}
+#spb{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));z-index:1000;transition:width .1s}
+nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);background:rgba(10,15,13,.88);border-bottom:1px solid var(--border);padding:0 20px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px;gap:14px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--green2);white-space:nowrap}
+.nav-prog{flex:1;max-width:200px}
+.nav-prog-label{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.pbw{height:6px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+.pbf{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:99px;transition:width .5s ease}
+.nav-badges{display:flex;gap:8px;align-items:center}
+.nav-badge{background:rgba(79,255,176,.1);border:1px solid rgba(79,255,176,.25);color:var(--green2);font-size:.73rem;font-weight:700;padding:5px 10px;border-radius:99px;white-space:nowrap}
+.nav-btn{background:linear-gradient(90deg,var(--green),var(--green2));color:#042018;border:none;border-radius:99px;padding:6px 12px;font:inherit;font-size:.75rem;font-weight:800;cursor:pointer;white-space:nowrap}
+.nav-btn:hover{opacity:.9}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.hero{padding:40px 20px 28px}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:20px}
+.hbadge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:rgba(79,255,176,.07);border:1px solid rgba(79,255,176,.2);color:var(--green2);font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);line-height:.95;margin-bottom:10px}
+h1 span{color:var(--green)}
+.hsub{color:var(--muted);font-size:.88rem;line-height:1.6;max-width:48ch}
+.avatar-wrap{position:relative;width:100px;height:100px;border-radius:50%;border:3px solid rgba(79,255,176,.4);overflow:hidden;box-shadow:0 0 30px rgba(79,255,176,.15);flex-shrink:0;background:linear-gradient(135deg,#1a2e26,#0d1f18);display:flex;align-items:flex-end;justify-content:center;cursor:pointer;transition:all .3s}
+.avatar-wrap:hover{border-color:var(--green);box-shadow:0 0 40px rgba(79,255,176,.3)}
+.avatar-wrap input{display:none}
+.avatar-upload-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;font-size:.7rem;color:var(--green);}
+.avatar-wrap:hover .avatar-upload-overlay{display:flex}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+.sc small{display:block;font-size:.68rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.sc strong{font-size:.92rem;font-weight:700}
+.grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.overall{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:20px}
+.overall h3{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px}
+.wdots{display:flex;flex-wrap:wrap;gap:6px}
+.dot{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;cursor:pointer;transition:all .2s;color:var(--muted);background:rgba(255,255,255,.03)}
+.dot.done{background:linear-gradient(135deg,var(--green),var(--green2));border-color:var(--green);color:#042018}
+.dot.active{border-color:var(--gold);color:var(--gold);background:rgba(255,209,102,.08);box-shadow:0 0 12px rgba(255,209,102,.2)}
+.dot:hover{border-color:var(--green);color:var(--green)}
+.heat-map{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.heat-cell{width:100%;aspect-ratio:1;border-radius:6px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02)}
+.heat-cell:hover{border-color:var(--green);transform:scale(1.1)}
+.heat-cell.intensity-1{background:rgba(79,255,176,.1)}
+.heat-cell.intensity-2{background:rgba(79,255,176,.2)}
+.heat-cell.intensity-3{background:rgba(79,255,176,.35)}
+.heat-cell.intensity-4{background:rgba(79,255,176,.55)}
+.overall-foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:12px}
+.overall-pct{color:var(--muted);font-size:.82rem;font-weight:600}
+.reset-btn{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);color:var(--red);border-radius:99px;padding:6px 12px;font:inherit;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .2s}
+.reset-btn:hover{background:rgba(255,107,107,.15)}
+.section{padding:0 20px 40px}
+.st{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:6px}
+.sd{color:var(--muted);font-size:.84rem;margin-bottom:16px}
+.feature-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:20px}
+.feature-box h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:12px;color:var(--green2)}
+.clock-widget{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.clock-item{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:12px;text-align:center}
+.clock-item .time{font-size:1.4rem;font-weight:800;color:var(--green)}
+.clock-item .label{font-size:.7rem;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.chat-widget{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:20px;max-height:250px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.chat-msg{padding:10px 12px;border-radius:10px;font-size:.82rem;line-height:1.4}
+.chat-msg.user{background:rgba(79,255,176,.1);border-left:2px solid var(--green)}
+.chat-msg.bot{background:rgba(107,154,255,.1);border-left:2px solid var(--blue)}
+.chat-input{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:8px}
+.chat-input input{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);padding:8px 12px;font:inherit;font-size:.82rem;outline:none}
+.chat-input input:focus{border-color:rgba(79,255,176,.3)}
+.chat-btn{background:rgba(79,255,176,.1);border:1px solid rgba(79,255,176,.22);color:var(--green2);border-radius:8px;padding:8px 12px;font:inherit;font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s}
+.chat-btn:hover{background:rgba(79,255,176,.2)}
+.recommendations{background:var(--card);border:1px solid var(--gold);border-radius:var(--r);padding:14px}
+.recommendations h5{font-size:.85rem;color:var(--gold);margin-bottom:10px;font-weight:700;text-transform:uppercase}
+.rec-item{padding:8px;background:rgba(255,209,102,.04);border-left:2px solid var(--gold);border-radius:6px;font-size:.82rem;line-height:1.4;margin-bottom:8px;color:var(--text)}
+.rec-item:last-child{margin-bottom:0}
+.timer-section{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.timer-display{font-family:monospace;font-size:2.2rem;font-weight:800;color:var(--green);margin:10px 0}
+.timer-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.timer-btn{background:rgba(79,255,176,.1);border:1px solid rgba(79,255,176,.22);color:var(--green2);border-radius:8px;padding:10px;font:inherit;font-weight:700;cursor:pointer;transition:all .2s;font-size:.82rem}
+.timer-btn:hover{background:rgba(79,255,176,.2)}
+.timer-btn.stop{background:rgba(255,107,107,.1);border-color:rgba(255,107,107,.2);color:var(--red)}
+.timer-btn.stop:hover{background:rgba(255,107,107,.15)}
+.profile-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center}
+.profile-modal.show{display:flex}
+.profile-content{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;max-width:400px;width:90%;max-height:80vh;overflow-y:auto}
+.profile-content h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;color:var(--green2)}
+.profile-field{margin-bottom:12px}
+.profile-field label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:4px;font-weight:700;text-transform:uppercase}
+.profile-field input,.profile-field textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);padding:10px 12px;font:inherit;font-size:.85rem;outline:none}
+.profile-field input:focus,.profile-field textarea:focus{border-color:rgba(79,255,176,.3)}
+.profile-btn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.profile-btn button{background:rgba(79,255,176,.1);border:1px solid rgba(79,255,176,.22);color:var(--green2);border-radius:8px;padding:10px;font:inherit;font-weight:700;cursor:pointer;transition:all .2s}
+.profile-btn button:hover{background:rgba(79,255,176,.2)}
+.profile-btn .close{background:rgba(255,107,107,.1);border-color:rgba(255,107,107,.2);color:var(--red)}
+.profile-btn .close:hover{background:rgba(255,107,107,.15)}
+.wtabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;padding-bottom:2px}
+.wtabs::-webkit-scrollbar{display:none}
+.wtab{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:99px;padding:8px 14px;font:inherit;font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .2s}
+.wtab:hover{border-color:rgba(79,255,176,.3);color:var(--green2)}
+.wtab.active{background:rgba(79,255,176,.1);border-color:rgba(79,255,176,.4);color:var(--green2)}
+.wblock{display:none}
+.wblock.vis{display:block}
+.wheader{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.wheader h2{font-family:'Playfair Display',serif;font-size:1.1rem}
+.wheader small{color:var(--muted);font-size:.8rem;display:block;margin-top:3px}
+.wpc{position:relative;width:48px;height:48px;flex-shrink:0}
+.wpc svg{transform:rotate(-90deg)}
+.wpc .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;color:var(--green2)}
+.btn-cw{background:linear-gradient(90deg,var(--green),var(--green2));color:#042018;border:none;border-radius:99px;padding:8px 14px;font:inherit;font-size:.76rem;font-weight:800;cursor:pointer;transition:opacity .2s}
+.btn-cw:hover{opacity:.85}
+.btn-cw.all{background:linear-gradient(90deg,var(--gold),#ffa552);color:#2a1000}
+.dgrid{display:grid;grid-template-columns:1fr;gap:10px}
+.dc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .25s}
+.dc.comp{border-color:rgba(79,255,176,.32)}
+.dhead{padding:14px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;user-select:none}
+.dhead:hover{background:rgba(255,255,255,.02)}
+.dhl{display:flex;align-items:center;gap:10px;flex:1}
+.chk{width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .25s;flex-shrink:0;cursor:pointer}
+.chk.on{background:var(--green);border-color:var(--green);color:#042018;box-shadow:0 0 10px rgba(79,255,176,.25)}
+.dname{font-weight:700;font-size:.9rem}
+.dfocus{font-size:.72rem;color:var(--muted);margin-top:2px}
+.dtag{font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.04em;flex-shrink:0}
+.ta{background:rgba(255,140,66,.12);color:var(--orange);border:1px solid rgba(255,140,66,.22)}
+.tm{background:rgba(255,209,102,.1);color:var(--gold);border:1px solid rgba(255,209,102,.18)}
+.tb{background:rgba(79,255,176,.08);color:var(--green2);border:1px solid rgba(79,255,176,.18)}
+.chev{color:var(--muted);font-size:.78rem;transition:transform .25s;flex-shrink:0}
+.dc.open .chev{transform:rotate(180deg)}
+.dbody{display:none;padding:0 16px 16px}
+.dc.open .dbody{display:block}
+.exl{display:grid;gap:8px;margin-top:4px}
+.ex{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.ex strong{display:block;font-size:.86rem;font-weight:700;margin-bottom:3px}
+.ex p{font-size:.79rem;color:var(--muted);line-height:1.5}
+.exb{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:5px}
+.exb span{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:99px;background:rgba(79,255,176,.07);border:1px solid rgba(79,255,176,.13);color:var(--green2)}
+.notes{margin-top:10px}
+.notes label{font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px}
+.notes textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);font:inherit;font-size:.8rem;padding:8px 10px;resize:vertical;min-height:50px;outline:none;transition:border-color .2s}
+.notes textarea:focus{border-color:rgba(79,255,176,.3)}
+.btn-sn{margin-top:6px;background:rgba(79,255,176,.08);border:1px solid rgba(79,255,176,.22);color:var(--green2);border-radius:99px;padding:5px 12px;font:inherit;font-size:.75rem;font-weight:700;cursor:pointer}
+.btn-sn:hover{background:rgba(79,255,176,.15)}
+.saved{margin-top:6px;padding:8px 10px;border-radius:8px;background:rgba(79,255,176,.05);border:1px solid rgba(79,255,176,.12);font-size:.78rem;color:var(--muted);display:none}
+.saved.show{display:block}
+.btn-mark{margin-top:10px;width:100%;background:rgba(79,255,176,.07);border:1px solid rgba(79,255,176,.18);color:var(--green2);border-radius:99px;padding:9px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .25s}
+.btn-mark:hover{background:rgba(79,255,176,.14)}
+.btn-mark.done{background:rgba(79,255,176,.16);border-color:var(--green);color:var(--green)}
+.nc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-top:20px}
+.nc h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:12px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.mi{padding:11px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.mi h4{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.mi .v{font-size:.95rem;font-weight:800}
+.bar{height:5px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:6px}
+.bf{height:100%;border-radius:99px}
+.bp{background:linear-gradient(90deg,var(--green),var(--green2))}
+.bc{background:linear-gradient(90deg,var(--orange),var(--gold))}
+.bg{background:linear-gradient(90deg,#9b7cff,#c9acff)}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.mitem{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.mitem strong{display:block;font-size:.82rem;font-weight:700;margin-bottom:3px}
+.mitem span{font-size:.76rem;color:var(--muted)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--green);color:#042018;font-weight:800;font-size:.84rem;padding:10px 20px;border-radius:99px;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{border-top:1px solid var(--border);padding:32px 20px 48px;text-align:center;position:relative;z-index:1}
+.footer-avatar{width:64px;height:64px;border-radius:50%;border:2px solid rgba(79,255,176,.35);overflow:hidden;margin:0 auto 12px;background:linear-gradient(135deg,#1a2e26,#0d1f18);display:flex;align-items:flex-end;justify-content:center}
+.footer-name{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--green2);margin-bottom:4px}
+.footer-sub{color:var(--muted);font-size:.8rem}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2col{grid-template-columns:1fr}.dgrid{grid-template-columns:1fr}.mgrid{grid-template-columns:1fr}.menu{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.avatar-wrap{width:80px;height:80px}}
+@media(max-width:600px){.stats{grid-template-columns:1fr}.nav-inner{height:auto;flex-direction:column;gap:8px;padding:8px 0}.nav-prog{max-width:none;width:100%}.nav-badges{flex-direction:column;width:100%;gap:6px}.nav-badge{width:100%;text-align:center}.nav-btn{width:100%}.heat-map{grid-template-columns:repeat(7,1fr)}.clock-widget{grid-template-columns:1fr}.profile-content{width:95%}}
+</style>
+</head>
+<body>
+<div id="spb"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Angélica Flórez</div>
+    <div class="nav-prog">
+      <div class="nav-prog-label">Progreso total</div>
+      <div class="pbw"><div class="pbf" id="totalBar" style="width:0%"></div></div>
+    </div>
+    <div class="nav-badges">
+      <div class="nav-badge" id="nbadge">Semana 1</div>
+      <button class="nav-btn" onclick="showProfileModal()">👤 Mi Perfil</button>
+      <button class="nav-btn" onclick="toggleChat()">💬 Chat IA</button>
+      <button class="nav-btn" onclick="exportReport()">📊 Reporte</button>
+      <button class="nav-btn" id="planBtn" onclick="showPlan()">🏋️ Plan Free</button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hbadge">⚡ Plan personalizado · Tensión mecánica</div>
+      <h1>Plan de<br><span>Transformación</span></h1>
+      <p class="hsub">Tu programa de 6 semanas para ganar masa muscular y definición. Sistema avanzado con IA, temporizadores, seguimiento visual y reporte automático.</p>
+    </div>
+    <!-- Avatar con carga de foto -->
+    <div class="avatar-wrap" onclick="document.getElementById('avatarInput').click();">
+      <img id="avatarImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 108'%3E%3Cellipse cx='48' cy='22' rx='22' ry='24' fill='%23c8860a'/%3E%3Cpath d='M26 28 Q18 60 22 90 Q30 80 36 85 Q40 72 48 72 Q56 72 60 85 Q66 80 74 90 Q78 60 70 28 Q60 42 48 42 Q36 42 26 28Z' fill='%23b07808'/%3E%3Crect x='42' y='52' width='12' height='14' rx='4' fill='%23e8b88a'/%3E%3Cellipse cx='48' cy='30' rx='16' ry='18' fill='%23f0c49a'/%3E%3Cpath d='M36 24 Q40 22 44 24' stroke='%237a4a10' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M52 24 Q56 22 60 24' stroke='%237a4a10' stroke-width='1.5' stroke-linecap='round'/%3E%3Cellipse cx='41' cy='28' rx='3' ry='3.5' fill='%235a3010'/%3E%3Cellipse cx='55' cy='28' rx='3' ry='3.5' fill='%235a3010'/%3E%3Cellipse cx='42' cy='27' rx='1' ry='1.2' fill='white'/%3E%3Cellipse cx='56' cy='27' rx='1' ry='1.2' fill='white'/%3E%3Cpath d='M48 32 Q46 36 44 37 Q48 39 52 37 Q50 36 48 32Z' fill='%23d4a07a'/%3E%3Cpath d='M43 42 Q48 46 53 42' stroke='%23d4607a' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Cpath d='M43 42 Q48 44 53 42' fill='%23e8809a'/%3E%3Cpath d='M30 66 L20 108 L76 108 L66 66 Q56 74 48 74 Q40 74 30 66Z' fill='%231a3d2e'/%3E%3Cpath d='M38 66 Q48 78 58 66 L60 74 Q48 86 36 74Z' fill='%234fffb0' opacity='0.3'/%3E%3Cpath d='M30 66 Q14 72 10 90 Q14 94 20 92 Q24 80 32 76Z' fill='%23e8b88a'/%3E%3Cpath d='M66 66 Q82 72 86 90 Q82 94 76 92 Q72 80 64 76Z' fill='%23e8b88a'/%3E%3Crect x='4' y='88' width='16' height='6' rx='3' fill='%23555'/%3E%3Crect x='6' y='84' width='4' height='14' rx='2' fill='%23777'/%3E%3Crect x='14' y='84' width='4' height='14' rx='2' fill='%23777'/%3E%3Crect x='76' y='88' width='16' height='6' rx='3' fill='%23555'/%3E%3Crect x='78' y='84' width='4' height='14' rx='2' fill='%23777'/%3E%3Crect x='86' y='84' width='4' height='14' rx='2' fill='%23777'/%3E%3Cellipse cx='44' cy='26' rx='3' ry='2' fill='white' opacity='0.15'/%3E%3C/svg%3E" alt="Angélica" style="width:100%;height:100%;object-fit:cover">
+      <input type="file" id="avatarInput" accept="image/*" onchange="uploadAvatar(event)">
+      <div class="avatar-upload-overlay">📷 Cambiar foto</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="sc"><small>Nombre</small><strong id="userName">Angélica Flórez</strong></div>
+    <div class="sc"><small>Altura</small><strong id="userHeight">1.70 m</strong></div>
+    <div class="sc"><small>Peso</small><strong id="userWeight">64 kg</strong></div>
+    <div class="sc"><small>Objetivo</small><strong>Músculo · Definición</strong></div>
+  </div>
+
+  <div class="grid-2col">
+    <div class="overall">
+      <h3>Progreso por semanas — toca para navegar</h3>
+      <div class="wdots" id="wdots"></div>
+      <div class="overall-foot">
+        <span class="overall-pct" id="opct">0% completado</span>
+        <button class="reset-btn" onclick="confirmReset()">🗑 Reiniciar progreso</button>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <h4>🔥 Mapa de Calor · Consistencia</h4>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:10px">Últimas 2 semanas de actividad</p>
+      <div class="heat-map" id="heatMap"></div>
+    </div>
+  </div>
+
+  <div class="grid-2col">
+    <div class="feature-box">
+      <h4>⏱️ Entrenamiento · Temporizador</h4>
+      <div class="timer-section">
+        <div style="font-size:.9rem;color:var(--muted);margin-bottom:8px">Ejercicio actual</div>
+        <div class="timer-display" id="timerDisplay">00:00</div>
+        <input type="number" id="timerInput" placeholder="Minutos" min="1" max="120" style="width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);padding:8px;font:inherit;font-size:.82rem;margin:10px 0;outline:none">
+        <div class="timer-controls">
+          <button class="timer-btn" onclick="startTimer()">▶️ Iniciar</button>
+          <button class="timer-btn stop" onclick="stopTimer()">⏸ Detener</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-box">
+      <h4>💡 Recomendaciones · Personalizadas</h4>
+      <div class="recommendations" id="recommendationsBox">
+        <h5>Consejos para hoy</h5>
+        <div id="recsList">
+          <div class="rec-item">• Bebe 3-4 litros de agua hoy</div>
+          <div class="rec-item">• Incrementa proteína a 120g para este día</div>
+          <div class="rec-item">• Enfócate en la forma, no en el peso del ejercicio</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chat Widget -->
+<div class="wrap section" id="chatSection" style="display:none;padding-top:20px">
+  <h2 class="st">💬 Asistente IA · Consultas en Vivo</h2>
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-msg bot">¡Hola! Soy tu asistente IA. ¿Cómo puedo ayudarte hoy?</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Pregunta sobre nutrición, ejercicios, form..." onkeypress="if(event.key==='Enter')sendChat()">
+    <button class="chat-btn" onclick="sendChat()">Enviar</button>
+  </div>
+  <div style="margin-top:8px;font-size:.75rem;color:var(--muted)">Powered by Ollama · Respuestas contextuales a tu plan</div>
+</div>
+
+<div class="wrap section">
+  <h2 class="st">Entrenamiento semanal</h2>
+  <p class="sd">Selecciona la semana, abre cada día, marca lo completado y agrega tus notas. Todo se guarda automáticamente en la nube.</p>
+  <div class="wtabs" id="wtabs"></div>
+  <div id="wblocks"></div>
+
+  <div class="nc">
+    <h3>🥗 Nutrición · El 70% del resultado</h3>
+    <div class="mgrid">
+      <div class="mi"><h4>Proteína</h4><div class="v">102–141 g</div><div style="font-size:.73rem;color:var(--muted)">1.6–2.2 g/kg</div><div class="bar"><div class="bf bp" style="width:80%"></div></div></div>
+      <div class="mi"><h4>Carbohidratos</h4><div class="v">192–320 g</div><div style="font-size:.73rem;color:var(--muted)">3–5 g/kg</div><div class="bar"><div class="bf bc" style="width:88%"></div></div></div>
+      <div class="mi"><h4>Grasas</h4><div class="v">51–77 g</div><div style="font-size:.73rem;color:var(--muted)">0.8–1.2 g/kg</div><div class="bar"><div class="bf bg" style="width:60%"></div></div></div>
+    </div>
+    <div class="menu">
+      <div class="mitem"><strong>☀️ Desayuno</strong><span>3 huevos + 2 tostadas integrales + aguacate + café sin azúcar</span></div>
+      <div class="mitem"><strong>🍽 Almuerzo</strong><span>Pechuga 150g + arroz integral 1 taza + verduras + aceite de oliva</span></div>
+      <div class="mitem"><strong>🥛 Merienda</strong><span>Yogur griego + frutos secos + fruta de temporada</span></div>
+      <div class="mitem"><strong>🌙 Cena</strong><span>Pescado 150g + batata al horno + brócoli al vapor</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Modal -->
+<div class="profile-modal" id="profileModal">
+  <div class="profile-content">
+    <h2>Mi Perfil</h2>
+    <div class="profile-field">
+      <label>Nombre</label>
+      <input type="text" id="profileName" placeholder="Tu nombre">
+    </div>
+    <div class="profile-field">
+      <label>Altura (m)</label>
+      <input type="number" id="profileHeight" placeholder="1.70" step="0.01">
+    </div>
+    <div class="profile-field">
+      <label>Peso (kg)</label>
+      <input type="number" id="profileWeight" placeholder="64" step="0.1">
+    </div>
+    <div class="profile-field">
+      <label>Objetivo personal</label>
+      <textarea id="profileGoal" placeholder="Describe tu objetivo..."></textarea>
+    </div>
+    <div class="profile-field">
+      <label>Email (para reportes)</label>
+      <input type="email" id="profileEmail" placeholder="tu@email.com">
+    </div>
+    <div class="profile-btn">
+      <button onclick="saveProfile()">💾 Guardar</button>
+      <button class="close" onclick="closeProfileModal()">❌ Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-avatar" style="width:56px;height:56px;margin:0 auto 10px">
+    <img id="footerAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 108'%3E%3Cellipse cx='48' cy='22' rx='22' ry='24' fill='%23c8860a'/%3E%3Cpath d='M26 28 Q18 60 22 90 Q30 80 36 85 Q40 72 48 72 Q56 72 60 85 Q66 80 74 90 Q78 60 70 28 Q60 42 48 42 Q36 42 26 28Z' fill='%23b07808'/%3E%3Crect x='42' y='52' width='12' height='14' rx='4' fill='%23e8b88a'/%3E%3Cellipse cx='48' cy='30' rx='16' ry='18' fill='%23f0c49a'/%3E%3Cpath d='M36 24 Q40 22 44 24' stroke='%237a4a10' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M52 24 Q56 22 60 24' stroke='%237a4a10' stroke-width='1.5' stroke-linecap='round'/%3E%3Cellipse cx='41' cy='28' rx='3' ry='3.5' fill='%235a3010'/%3E%3Cellipse cx='55' cy='28' rx='3' ry='3.5' fill='%235a3010'/%3E%3Cpath d='M43 42 Q48 46 53 42' stroke='%23d4607a' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Cpath d='M30 66 L20 108 L76 108 L66 66 Q56 74 48 74 Q40 74 30 66Z' fill='%231a3d2e'/%3E%3Cpath d='M38 66 Q48 78 58 66 L60 74 Q48 86 36 74Z' fill='%234fffb0' opacity='0.3'/%3E%3C/svg%3E" alt="Angélica" style="width:100%;height:100%;object-fit:cover">
+  </div>
+  <div class="footer-name" id="footerName">Angélica Flórez</div>
+  <div class="footer-sub">Content Creator · Fitness · Model · Bienestar<br>Plan de Transformación · 6 semanas · Tensión mecánica</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== CONFIGURACIÓN ====================
+var DAYS = [
+  {id:'lunes', name:'Lunes', focus:'Cuadriceps + Gluteo', intensity:'alta', exercises:[
+    {name:'Calentamiento circuito', sets:'', reps:'', note:'20 sentadillas sencillas - sentadilla con salto. Ir bajando hasta 14+6. Meta: 10+10 sin parar.'},
+    {name:'Sentadilla libre con barra', sets:'3 series', reps:'8-10 reps 80%', note:'Profundas, tecnica correcta, sin lesionar articulaciones.'},
+    {name:'Sentadilla Sumo', sets:'3 series', reps:'8-10 reps', note:'Mancuerna 40kg. Media y completa. Circuito con anterior.'},
+    {name:'Burpees', sets:'3 series', reps:'10-15 + 20s resistencia', note:'Todo el circuito cuenta como 1 serie. Descanso 2 min.'},
+    {name:'Prensa + Zancada biserie', sets:'3 series', reps:'8 neg + 8 pos + 12 explosivas', note:'Bajar 3s, subir explosivo. Luego 8-12 zancadas.'},
+    {name:'Prensa pendulo unipodal', sets:'4 series', reps:'10 c/pierna + 15 ambas + 20s', note:'Descanso 1:30 min.'},
+    {name:'Extension rodilla triserie', sets:'3 series', reps:'8 - 10 - 12 reps', note:'Subir 2 placas por set. Terminar 10s isometrico. Desc 1:30.'},
+    {name:'Pantorrilla maquina', sets:'3 series', reps:'20-25 reps', note:'Sostener 2 segundos arriba.'},
+    {name:'Pantorrilla con barra', sets:'3 series', reps:'20 reps', note:'Sostener 2 segundos.'},
+    {name:'Hip Thrust biserie', sets:'4 series', reps:'10 x5s iso + 10 explosivas + 10s iso', note:'Descanso 1:30 min.'},
+    {name:'Patada elevacion crossover', sets:'4 series', reps:'10-15 reps', note:'Estira la zona al terminar. IMPORTANTE siempre estirar.'}
+  ]},
+  {id:'martes', name:'Martes', focus:'Brazos · Hombros · Biceps · Triceps', intensity:'alta', exercises:[
+    {name:'Calentamiento', sets:'3 series', reps:'15 flexiones pecho', note:''},
+    {name:'Curl biceps 1x1 ascendente', sets:'3 series', reps:'Hasta 6 c/brazo + 12 ambos', note:'Descanso 1 min.'},
+    {name:'Curl con barra', sets:'3 series', reps:'7 cortas + 7 medias + 12 completas + 5s iso', note:'Isometrico a mitad de rango.'},
+    {name:'Press militar biserie', sets:'3 series', reps:'1x1 hasta 6 + 10 reps', note:''},
+    {name:'Vuelos combinados', sets:'3 series', reps:'12 reps + 5s iso', note:'Biserie con press militar.'},
+    {name:'Vuelos frontales unipodal', sets:'3 series', reps:'10 reps + 5s iso', note:'Biserie.'},
+    {name:'Vuelos laterales', sets:'3 series', reps:'8-12 reps', note:'Descanso 1:30 min.'},
+    {name:'Extension codos + polea + fondos', sets:'3 series', reps:'15 reps c/u', note:'Triserie.'},
+    {name:'Fondos en banco', sets:'3 series', reps:'10 neg + 10 explosivas', note:''},
+    {name:'Fondos maquina sentado', sets:'3 series', reps:'15 pronacion + 15 neutro', note:''},
+    {name:'Flexiones basico', sets:'3 series', reps:'10 reps', note:'Triserie.'},
+    {name:'Plancha con comando', sets:'3 series', reps:'6 + 30s + 1 min plancha final', note:''}
+  ]},
+  {id:'miercoles', name:'Miercoles', focus:'Femoral · Gluteo · Pantorrilla', intensity:'alta', exercises:[
+    {name:'Calentamiento', sets:'', reps:'', note:'Igual al lunes: 20 sentadillas descendiendo.'},
+    {name:'Hip Thrust biserie', sets:'4 series', reps:'10 x5s + 10 explosivas + 10s iso', note:'Desc 1:30.'},
+    {name:'Peso muerto biserie', sets:'3 series', reps:'12-15 reps (bajar 4s + subir explosivo)', note:'Retroversion pelvica al subir. Sin descanso pasa al siguiente.'},
+    {name:'Peso muerto unipodal', sets:'3 series', reps:'12 reps c/pierna', note:'Biserie. Desc 2 min.'},
+    {name:'Patada crossover + extension biserie', sets:'3 series', reps:'8-10 + estirada 8-12', note:'Sin descanso entre los dos. Desc 2 min.'},
+    {name:'Bulgara triserie', sets:'4 series x pierna', reps:'10 sin peso + 12 medio + 12 pesado', note:'3 sets por pierna = 1 serie. Luego la otra.'},
+    {name:'Curl femoral acostado triserie', sets:'3 series', reps:'8 - 10 (5s iso) - 12 (10s iso)', note:'Subir 2 placas por set. Desc 1:30.'},
+    {name:'Patada mancuerna colchoneta', sets:'3 series', reps:'8 (2s arriba) + 10 explosivas', note:''},
+    {name:'Pantorrilla', sets:'', reps:'', note:'Repite ejercicios del lunes.'}
+  ]},
+  {id:'jueves', name:'Jueves', focus:'Espalda · Pecho · Abdomen', intensity:'alta', exercises:[
+    {name:'Calentamiento', sets:'', reps:'', note:'Movilidad articular completa.'},
+    {name:'Remo barra agarre mixto', sets:'3 series', reps:'12 pronacion + 15 supinacion', note:'Desc 60s.'},
+    {name:'Tres maquinas Hammer', sets:'3 series', reps:'8 un brazo + 8 otro + 15 ambos', note:'Desc 60s.'},
+    {name:'Remo en polea triserie', sets:'3 series', reps:'8 max - 10 - 12', note:'Bajar placa por set. Desc 1 min.'},
+    {name:'Dominadas libres', sets:'3 series', reps:'6-10 reps', note:''},
+    {name:'Tres agarres triserie', sets:'3 series', reps:'8 reps c/agarre + 5s iso concentrica', note:''},
+    {name:'Flexiones pecho', sets:'4 series', reps:'8 reps (+2 reps cada semana)', note:'Basico o en rodillas.'},
+    {name:'Abdomen Circuito 1', sets:'3 series', reps:'Colgado jaula 15 · Elevacion pies 20', note:'Crunch manos-pies 20 · Bicicleta 30s · Plancha 1min. Desc 30s.'},
+    {name:'Abdomen Circuito 2 Core', sets:'4 series', reps:'Plancha 10s - Escalador 30s - Piernas laterales 20s - Plancha 60s', note:'Oblicuos: 30 laterales c/pierna - 40s manos-talon - 40s tijeras - 1min elevaciones. Desc 30s.'}
+  ]},
+  {id:'viernes', name:'Viernes', focus:'Pierna completa · Gluteo · Isquio', intensity:'media', exercises:[
+    {name:'Calentamiento', sets:'', reps:'', note:'Movilidad articular.'},
+    {name:'Sentadilla', sets:'3 series', reps:'12 reps', note:''},
+    {name:'Desplazamiento en zancada', sets:'3 series', reps:'12 pasos', note:''},
+    {name:'Hip Thrust biserie', sets:'3 series', reps:'10 x5s iso + 8 explosivas', note:'Desc 1:30 min.'},
+    {name:'Patada elevacion crossover', sets:'3 series', reps:'10-12 reps', note:''},
+    {name:'Curl femoral', sets:'3 series', reps:'15 reps', note:''},
+    {name:'Burpees con salto', sets:'4 series', reps:'15 reps', note:''}
+  ]},
+  {id:'sabado', name:'Sabado', focus:'Abdomen + Cardio · Escaladora 30 min', intensity:'baja', exercises:[
+    {name:'Escaladora', sets:'1 sesion', reps:'30 minutos', note:'Ritmo moderado constante.'},
+    {name:'Abdomen circuito', sets:'3 series', reps:'Colgado jaula 15 · Elevacion pies 20', note:'Crunch manos-pies 20 · Bicicleta 30s · Plancha 1min. Desc 30s.'}
+  ]},
+  {id:'domingo', name:'Domingo', focus:'Descanso total y recuperacion', intensity:'baja', exercises:[
+    {name:'Descanso y recuperacion', sets:'', reps:'', note:'Minimo 8h sueno. 2-3L de agua. Alimentacion limpia.'},
+    {name:'Recordatorio importante', sets:'', reps:'', note:'Espera a que el ritmo cardiaco baje ANTES de tomar liquido tras ejercicio intenso.'}
+  ]}
+];
+
+var TW = 6;
+var SK = 'af_v4_adv';
+var curW = 1;
+var timerInterval = null;
+var timerSeconds = 0;
+
+// ==================== UTILIDADES ====================
+function ld() {
+  try { return JSON.parse(localStorage.getItem(SK)) || {}; } catch(e) { return {}; }
+}
+function sv(d) {
+  try { localStorage.setItem(SK, JSON.stringify(d)); } catch(e) {}
+}
+function showToast(m) {
+  var t = document.getElementById('toast');
+  t.textContent = m;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2200);
+}
+function calcWeek(data, w) {
+  var done = 0;
+  for (var i = 0; i < DAYS.length; i++) {
+    if (data['w' + w + '_' + DAYS[i].id] === 'done') done++;
+  }
+  return Math.round(done / DAYS.length * 100);
+}
+function calcTotal(data) {
+  var total = 0, done = 0;
+  for (var w = 1; w <= TW; w++) {
+    for (var i = 0; i < DAYS.length; i++) {
+      total++;
+      if (data['w' + w + '_' + DAYS[i].id] === 'done') done++;
+    }
+  }
+  return total ? Math.round(done / total * 100) : 0;
+}
+
+// ==================== ACTUALIZAR UI ====================
+function updateAll() {
+  var data = ld();
+  var tot = calcTotal(data);
+  document.getElementById('totalBar').style.width = tot + '%';
+  document.getElementById('opct').textContent = tot + '% completado';
+  var dots = document.querySelectorAll('.dot');
+  for (var d = 0; d < dots.length; d++) {
+    var w = parseInt(dots[d].dataset.w);
+    var wp = calcWeek(data, w);
+    dots[d].classList.toggle('done', wp === 100);
+    dots[d].classList.toggle('active', w === curW);
+  }
+  for (var w = 1; w <= TW; w++) {
+    var wp = calcWeek(data, w);
+    var circ = document.getElementById('wc_' + w);
+    if (circ) {
+      var fill = circ.querySelector('.fill');
+      var r = 20, c = 2 * Math.PI * r;
+      if (fill) fill.style.strokeDashoffset = c - (c * wp / 100);
+      var pe = circ.querySelector('.pct');
+      if (pe) pe.textContent = wp + '%';
+    }
+    var btn = document.getElementById('bcw_' + w);
+    if (btn) {
+      btn.textContent = wp === 100 ? 'Semana completa' : 'Marcar semana completa';
+      btn.classList.toggle('all', wp === 100);
+    }
+    for (var i = 0; i < DAYS.length; i++) {
+      var day = DAYS[i];
+      var key = 'w' + w + '_' + day.id;
+      var isDone = data[key] === 'done';
+      var card = document.getElementById('dc_' + w + '_' + day.id);
+      var chk = document.getElementById('chk_' + w + '_' + day.id);
+      var bm = document.getElementById('bm_' + w + '_' + day.id);
+      if (card) card.classList.toggle('comp', isDone);
+      if (chk) { chk.classList.toggle('on', isDone); chk.textContent = isDone ? '✓' : ''; }
+      if (bm) { bm.classList.toggle('done', isDone); bm.textContent = isDone ? '✓ Completado' : 'Marcar como completado'; }
+    }
+  }
+  updateHeatMap();
+  updateRecommendations();
+}
+
+// ==================== CALOR MAP ====================
+function updateHeatMap() {
+  var data = ld();
+  var heatMap = document.getElementById('heatMap');
+  heatMap.innerHTML = '';
+  var today = new Date();
+  for (var i = 13; i >= 0; i--) {
+    var d = new Date(today);
+    d.setDate(d.getDate() - i);
+    var dayKey = 'w' + curW + '_' + ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'][d.getDay()];
+    var count = 0;
+    for (var w = 1; w <= TW; w++) {
+      for (var j = 0; j < DAYS.length; j++) {
+        if (data['w' + w + '_' + DAYS[j].id] === 'done') count++;
+      }
+    }
+    var intensity = Math.min(4, Math.floor(count / 3));
+    var cell = document.createElement('div');
+    cell.className = 'heat-cell' + (intensity > 0 ? ' intensity-' + intensity : '');
+    cell.title = d.toLocaleDateString();
+    cell.textContent = d.getDate();
+    heatMap.appendChild(cell);
+  }
+}
+
+// ==================== RECOMENDACIONES ====================
+function updateRecommendations() {
+  var data = ld();
+  var recsList = document.getElementById('recsList');
+  var recs = [
+    '• Bebe 3-4 litros de agua hoy',
+    '• Incrementa proteína a 120g para este día',
+    '• Enfócate en la forma, no en el peso del ejercicio',
+    '• Duerme mínimo 7-8 horas para recuperación',
+    '• Come dentro de 30 minutos post-workout'
+  ];
+  recsList.innerHTML = '';
+  for (var i = 0; i < Math.min(3, recs.length); i++) {
+    var rec = document.createElement('div');
+    rec.className = 'rec-item';
+    rec.textContent = recs[i];
+    recsList.appendChild(rec);
+  }
+}
+
+// ==================== TIMER ====================
+function startTimer() {
+  var mins = parseInt(document.getElementById('timerInput').value) || 5;
+  timerSeconds = mins * 60;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(function() {
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      showToast('⏱️ Tiempo completado!');
+      speakNotification('Tu tiempo de ejercicio ha terminado');
+      return;
+    }
+    timerSeconds--;
+    updateTimerDisplay();
+  }, 1000);
+  updateTimerDisplay();
+}
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerSeconds = 0;
+  document.getElementById('timerDisplay').textContent = '00:00';
+}
+function updateTimerDisplay() {
+  var mins = Math.floor(timerSeconds / 60);
+  var secs = timerSeconds % 60;
+  document.getElementById('timerDisplay').textContent = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+// ==================== NOTIFICACIONES POR VOZ ====================
+function speakNotification(text) {
+  if ('speechSynthesis' in window) {
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'es-ES';
+    utterance.rate = 1;
+    speechSynthesis.speak(utterance);
+  }
+}
+
+// ==================== CHAT IA - OLLAMA INTEGRATION ====================
+// Estas funciones se conectan con Ollama para IA real
+let ollamaReady = false;
+let sendOllamaMessageFunc = null;
+
+function toggleChat() {
+  var chatSection = document.getElementById('chatSection');
+  chatSection.style.display = chatSection.style.display === 'none' ? 'block' : 'none';
+}
+
+function sendChat() {
+  var input = document.getElementById('chatInput');
+  var msg = input.value.trim();
+  if (!msg) return;
+
+  var widget = document.getElementById('chatWidget');
+  var userMsg = document.createElement('div');
+  userMsg.className = 'chat-msg user';
+  userMsg.textContent = msg;
+  widget.appendChild(userMsg);
+  input.value = '';
+  widget.scrollTop = widget.scrollHeight;
+
+  // Guardar mensaje del usuario localmente
+  saveChatMessageLocally('user', msg);
+
+  // Si Ollama está disponible, usar integración real
+  if (ollamaReady && sendOllamaMessageFunc) {
+    sendOllamaMessageFunc(msg);
+  } else {
+    // Fallback: respuesta simulada
+    setTimeout(function() {
+      var botMsg = document.createElement('div');
+      botMsg.className = 'chat-msg bot';
+      botMsg.textContent = 'ℹ️ Ollama no está disponible. Respuesta simulada:\n\nEntendido. Basado en tu plan de transformación, puedo ayudarte con: ' + msg.substring(0, 50) + '...';
+      widget.appendChild(botMsg);
+      widget.scrollTop = widget.scrollHeight;
+      saveChatMessageLocally('assistant', 'Ollama no disponible: ' + botMsg.textContent);
+    }, 500);
+  }
+}
+
+// Guardar mensaje en localStorage localmente
+function saveChatMessageLocally(role, content) {
+  var SK = 'af_v4_adv_chat';
+  var chatHistory = [];
+  try {
+    chatHistory = JSON.parse(localStorage.getItem(SK)) || [];
+  } catch(e) {
+    chatHistory = [];
+  }
+  chatHistory.push({
+    role: role,
+    content: content,
+    timestamp: new Date().toISOString()
+  });
+  // Mantener últimos 50 mensajes
+  if (chatHistory.length > 50) {
+    chatHistory = chatHistory.slice(-50);
+  }
+  try {
+    localStorage.setItem(SK, JSON.stringify(chatHistory));
+  } catch(e) {}
+}
+
+// ==================== PERFIL ====================
+function showProfileModal() {
+  var data = ld();
+  document.getElementById('profileName').value = data.userName || 'Angélica Flórez';
+  document.getElementById('profileHeight').value = data.userHeight || '1.70';
+  document.getElementById('profileWeight').value = data.userWeight || '64';
+  document.getElementById('profileGoal').value = data.userGoal || '';
+  document.getElementById('profileEmail').value = data.userEmail || '';
+  document.getElementById('profileModal').classList.add('show');
+}
+function closeProfileModal() {
+  document.getElementById('profileModal').classList.remove('show');
+}
+function saveProfile() {
+  var data = ld();
+  data.userName = document.getElementById('profileName').value;
+  data.userHeight = document.getElementById('profileHeight').value;
+  data.userWeight = document.getElementById('profileWeight').value;
+  data.userGoal = document.getElementById('profileGoal').value;
+  data.userEmail = document.getElementById('profileEmail').value;
+  sv(data);
+
+  document.getElementById('userName').textContent = data.userName;
+  document.getElementById('userHeight').textContent = data.userHeight + ' m';
+  document.getElementById('userWeight').textContent = data.userWeight + ' kg';
+  document.getElementById('footerName').textContent = data.userName;
+
+  showToast('✓ Perfil guardado');
+  closeProfileModal();
+}
+function uploadAvatar(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(event) {
+    var img = event.target.result;
+    document.getElementById('avatarImg').src = img;
+    document.getElementById('footerAvatar').src = img;
+    var data = ld();
+    data.userAvatar = img;
+    sv(data);
+    showToast('📷 Foto de perfil actualizada');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ==================== REPORTES ====================
+function exportReport() {
+  var data = ld();
+  var total = calcTotal(data);
+  var report = 'REPORTE DE PROGRESO - ' + (new Date()).toLocaleDateString() + '\n\n';
+  report += 'Progreso general: ' + total + '%\n\n';
+  for (var w = 1; w <= TW; w++) {
+    report += 'Semana ' + w + ': ' + calcWeek(data, w) + '%\n';
+  }
+  report += '\nUsuario: ' + (data.userName || 'Angélica Flórez') + '\nPeso: ' + (data.userWeight || '64') + ' kg\n';
+
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(report));
+  element.setAttribute('download', 'reporte-fitness.txt');
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+  showToast('📊 Reporte descargado');
+}
+
+// ==================== PLAN FREE ====================
+function showPlan() {
+  var planData = '🏋️ PLAN FREE - Características incluidas:\n\n✓ 6 semanas de entrenamiento\n✓ Nutrición personalizada\n✓ Seguimiento de progreso\n✓ Timer para ejercicios\n✓ Recomendaciones IA\n✓ Exportación de reportes\n✓ Sincronización en la nube\n\n¿Listo para comenzar tu transformación?';
+  alert(planData);
+}
+
+// ==================== DÍAS Y CARDS ====================
+function toggleDay(w, id) {
+  var data = ld();
+  var k = 'w' + w + '_' + id;
+  data[k] = data[k] === 'done' ? '' : 'done';
+  sv(data);
+  updateAll();
+  if (data[k] === 'done') {
+    showToast('Día completado! Excelente! 💪');
+    speakNotification('Día completado excelente');
+  }
+}
+function saveNote(w, id) {
+  var ta = document.getElementById('nt_' + w + '_' + id);
+  if (!ta) return;
+  var data = ld();
+  data['note_' + w + '_' + id] = ta.value;
+  sv(data);
+  var s = document.getElementById('sv_' + w + '_' + id);
+  if (s) { s.textContent = '📝 ' + ta.value; s.classList.add('show'); }
+  showToast('Nota guardada ✓');
+}
+function toggleCard(w, id) {
+  var c = document.getElementById('dc_' + w + '_' + id);
+  if (c) c.classList.toggle('open');
+}
+function goWeek(w) {
+  curW = w;
+  var blocks = document.querySelectorAll('.wblock');
+  for (var i = 0; i < blocks.length; i++) blocks[i].classList.remove('vis');
+  var b = document.getElementById('wb_' + w);
+  if (b) b.classList.add('vis');
+  var tabs = document.querySelectorAll('.wtab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.toggle('active', parseInt(tabs[i].dataset.w) === w);
+  document.getElementById('nbadge').textContent = 'Semana ' + w;
+  updateAll();
+}
+function completeWeek(w) {
+  var data = ld();
+  var wp = calcWeek(data, w);
+  var target = wp === 100 ? '' : 'done';
+  for (var i = 0; i < DAYS.length; i++) data['w' + w + '_' + DAYS[i].id] = target;
+  sv(data);
+  updateAll();
+  showToast(target === 'done' ? 'Semana ' + w + ' completada! 🎉' : 'Semana ' + w + ' desmarcada');
+}
+function confirmReset() {
+  if (confirm('Reiniciar todo el progreso? Esta accion no se puede deshacer.')) {
+    localStorage.removeItem(SK);
+    updateAll();
+    showToast('Progreso reiniciado');
+  }
+}
+
+// ==================== CONSTRUCTOR ====================
+function build() {
+  var data = ld();
+
+  // Avatar cargado
+  if (data.userAvatar) {
+    document.getElementById('avatarImg').src = data.userAvatar;
+    document.getElementById('footerAvatar').src = data.userAvatar;
+  }
+
+  var dotsEl = document.getElementById('wdots');
+  for (var w = 1; w <= TW; w++) {
+    var d = document.createElement('div');
+    d.className = 'dot';
+    d.dataset.w = w;
+    d.textContent = 'S' + w;
+    (function(ww) { d.onclick = function() { goWeek(ww); }; })(w);
+    dotsEl.appendChild(d);
+  }
+
+  var tabsEl = document.getElementById('wtabs');
+  for (var w = 1; w <= TW; w++) {
+    var t = document.createElement('button');
+    t.className = 'wtab' + (w === 1 ? ' active' : '');
+    t.dataset.w = w;
+    t.textContent = 'Semana ' + w;
+    (function(ww) { t.onclick = function() { goWeek(ww); }; })(w);
+    tabsEl.appendChild(t);
+  }
+
+  var blocksEl = document.getElementById('wblocks');
+  var tagMap = {alta:'ta', media:'tm', baja:'tb'};
+  var tagLabel = {alta:'Alta', media:'Media', baja:'Baja'};
+
+  for (var w = 1; w <= TW; w++) {
+    var r = 20, c = 2 * Math.PI * r;
+    var block = document.createElement('div');
+    block.className = 'wblock' + (w === 1 ? ' vis' : '');
+    block.id = 'wb_' + w;
+    block.innerHTML = '<div class="wheader"><div><h2>Semana ' + w + ' / ' + TW + '</h2><small>Tension mecanica · Fuerza e hipertrofia</small></div><div style="display:flex;align-items:center;gap:10px"><div class="wpc" id="wc_' + w + '"><svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="' + r + '" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="4"/><circle class="fill" cx="26" cy="26" r="' + r + '" fill="none" stroke="url(#g' + w + ')" stroke-width="4" stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + c + '"/><defs><linearGradient id="g' + w + '" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4fffb0"/><stop offset="100%" stop-color="#ffd166"/></linearGradient></defs></svg><div class="pct">0%</div></div><button class="btn-cw" id="bcw_' + w + '" onclick="completeWeek(' + w + ')">Marcar semana completa</button></div></div><div class="dgrid" id="dg_' + w + '"></div>';
+    blocksEl.appendChild(block);
+
+    var grid = document.getElementById('dg_' + w);
+    for (var i = 0; i < DAYS.length; i++) {
+      var day = DAYS[i];
+      var isDone = data['w' + w + '_' + day.id] === 'done';
+      var noteVal = data['note_' + w + '_' + day.id] || '';
+      var exHTML = '';
+      for (var j = 0; j < day.exercises.length; j++) {
+        var ex = day.exercises[j];
+        exHTML += '<div class="ex">';
+        if (ex.sets || ex.reps) {
+          exHTML += '<div class="exb">';
+          if (ex.sets) exHTML += '<span>' + ex.sets + '</span>';
+          if (ex.reps) exHTML += '<span>' + ex.reps + '</span>';
+          exHTML += '</div>';
+        }
+        exHTML += '<strong>' + ex.name + '</strong>';
+        if (ex.note) exHTML += '<p>' + ex.note + '</p>';
+        exHTML += '</div>';
+      }
+
+      var dc = document.createElement('div');
+      dc.className = 'dc' + (isDone ? ' comp' : '');
+      dc.id = 'dc_' + w + '_' + day.id;
+      dc.innerHTML = '<div class="dhead" onclick="toggleCard(' + w + ',\'' + day.id + '\')"><div class="dhl"><div class="chk' + (isDone ? ' on' : '') + '" id="chk_' + w + '_' + day.id + '" onclick="event.stopPropagation();toggleDay(' + w + ',\'' + day.id + '\')">' + (isDone ? '✓' : '') + '</div><div><div class="dname">' + day.name + '</div><div class="dfocus">' + day.focus + '</div></div></div><div style="display:flex;align-items:center;gap:7px"><span class="dtag ' + tagMap[day.intensity] + '">' + tagLabel[day.intensity] + '</span><span class="chev">▼</span></div></div><div class="dbody"><div class="exl">' + exHTML + '</div><div class="notes"><label>Mis notas del dia</label><textarea id="nt_' + w + '_' + day.id + '" placeholder="Ej: Subi 5kg en prensa...">' + noteVal + '</textarea><button class="btn-sn" onclick="saveNote(' + w + ',\'' + day.id + '\')">Guardar nota</button><div class="saved' + (noteVal ? ' show' : '') + '" id="sv_' + w + '_' + day.id + '">' + (noteVal ? '📝 ' + noteVal : '') + '</div></div><button class="btn-mark' + (isDone ? ' done' : '') + '" id="bm_' + w + '_' + day.id + '" onclick="toggleDay(' + w + ',\'' + day.id + '\')">' + (isDone ? '✓ Completado' : 'Marcar como completado') + '</button></div>';
+      grid.appendChild(dc);
+    }
+  }
+}
+
+// ==================== SCROLL PROGRESS ====================
+window.addEventListener('scroll', function() {
+  var e = document.documentElement;
+  document.getElementById('spb').style.width = (e.scrollTop / (e.scrollHeight - e.clientHeight) * 100) + '%';
+});
+
+// ==================== INICIALIZACIÓN ====================
+build();
+updateAll();
+
+// Cargar datos del perfil
+var data = ld();
+if (data.userName) document.getElementById('userName').textContent = data.userName;
+if (data.userHeight) document.getElementById('userHeight').textContent = data.userHeight + ' m';
+if (data.userWeight) document.getElementById('userWeight').textContent = data.userWeight + ' kg';
+if (data.userName) document.getElementById('footerName').textContent = data.userName;
+
+// ==================== CARGAR MÓDULOS DE OLLAMA ====================
+// Importar dinámicamente el módulo de Ollama para integración real
+(function() {
+  // Nota: Si usas Vite o bundler, descomentar líneas abajo
+  // import('./js/ollama-integration.js').then(module => {
+  //   sendOllamaMessageFunc = module.sendOllamaMessage;
+  //   module.checkOllamaAvailability().then(available => {
+  //     ollamaReady = available;
+  //     if (available) {
+  //       console.log('✅ Ollama listo para chat IA');
+  //     }
+  //   });
+  // }).catch(err => {
+  //   console.warn('⚠️  No se pudo cargar módulo Ollama:', err);
+  // });
+
+  // Para desarrollo sin bundler, cargar el script directamente
+  var script = document.createElement('script');
+  script.type = 'module';
+  script.textContent = `
+    import { sendOllamaMessage, checkOllamaAvailability } from './js/ollama-integration.js';
+
+    // Hacer función disponible globalmente
+    window.ollamaReady = false;
+    window.sendOllamaMessageFunc = sendOllamaMessage;
+
+    // Verificar disponibilidad
+    checkOllamaAvailability().then(available => {
+      window.ollamaReady = available;
+      console.log(available ? '✅ Ollama listo para chat IA' : '⚠️  Ollama no disponible');
+
+      // Mostrar estado en UI (opcional)
+      if (available) {
+        var msg = document.getElementById('chatWidget');
+        if (msg) {
+          var statusMsg = document.createElement('div');
+          statusMsg.className = 'chat-msg bot';
+          statusMsg.textContent = '✅ Asistente IA conectado. ¿En qué puedo ayudarte?';
+          msg.appendChild(statusMsg);
+        }
+      }
+    });
+  `;
+  document.body.appendChild(script);
+})();
+</script>
+</body>
+</html>
